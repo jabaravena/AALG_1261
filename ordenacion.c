@@ -17,8 +17,8 @@
 /* Autores: Isaac Barriales & Jose A. Bravo        */  
 /* Entrada:                                        */
 /* tabla: puntero a integer que se va a ordenar    */
-/* ip: El primer elemento de la tabla              */
-/* iu: El último elemento de la tabla              */
+/* ip: El indice del primer elemento de la tabla   */
+/* iu: El indice del último elemento de la tabla   */
 /* Salida                                          */
 /* Count: El Nº de veces que se ejecuta la OB      */
 /***************************************************/
