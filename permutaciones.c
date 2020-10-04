@@ -102,8 +102,8 @@ int* genera_perm(int N)
 }
 
 /***************************************************/
-/* Funcion: genera_permutaciones Fecha:            */
-/* Autores:                                        */
+/* Funcion: genera_permutaciones Fecha:  04/10/20  */
+/* Autores: Isaac Barriales & Jose A. Bravo        */
 /*                                                 */
 /* Funcion que genera n_perms permutaciones        */
 /* aleatorias de tamanio elementos                 */
@@ -111,7 +111,7 @@ int* genera_perm(int N)
 /* Entrada:                                        */
 /* int n_perms: Numero de permutaciones            */
 /* int N: Numero de elementos de cada              */
-/* permutacion                                     */
+/* permutacion. N debe ser mayor que 0             */
 /* Salida:                                         */
 /* int**: Array de punteros a enteros              */
 /* que apuntan a cada una de las                   */
@@ -120,7 +120,27 @@ int* genera_perm(int N)
 /***************************************************/
 int** genera_permutaciones(int n_perms, int N)
 {
+  int ** perm;
+  int i, j;
 
+  perm = (int ** )malloc(n_perms * sizeof(*perm)); 
+  if(!perm) {
+    return NULL;
+  }
+  
+  
+  for(i=0;i<n_perms;i++){
+    perm[i] = genera_perm(N);
+    if(!perm[i]) {
+      for(j=i-1; j>=0; j--) {
+        free(perm[j]);
+      }
+      free(perm);
+      return NULL;
+    }
+  }
+  
+  return perm;
 
 
 }
