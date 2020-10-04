@@ -23,21 +23,18 @@
 /* Entrada:                                        */
 /* int inf: limite inferior                        */
 /* int sup: limite superior                        */
+/*                                                 */
+/* limite inferior siempre mayor que 0             */
+/* limite superior siempre mayor que 0             */
+/*                                                 */
 /* Salida:                                         */
 /* int: numero aleatorio                           */
 /***************************************************/
 int aleat_num(int inf, int sup)
 {
-  /**rand ---> numero entre 0 y 100000000 = aleatBig
-  aleatBig % (sup - inf + 1) ----> numeros aleatorios entre 0 y (sup - inf)      = aleat2
-
-  aleatFinal = aleat2 + inf ---> entre inf y sup**/
 
   int aleatBig = 0, aleat2 = 0, aleatFinal = 0;
 
-  if(inf > sup || inf < 0 || sup < 0){
-    return -1;
-  }
 
   aleatBig = rand();
 
@@ -46,6 +43,23 @@ int aleat_num(int inf, int sup)
 
   return aleatFinal;
 
+}
+
+/***************************************************/
+/* Funcion: swap Fecha: 04/10/2020                 */
+/* Autores: Isaac Barriales Y Jose Antonio Bravo   */
+/*                                                 */
+/* Función que inetercambia el contenido           */
+/* de dos punteros integer                         */
+/*                                                 */
+/* Entrada:                                        */
+/* int a: Dirección del número a cambiar           */
+/* int b: Dirección del número a cambiar           */
+/***************************************************/
+void swap(int* a, int *b){
+  int aux = *a;
+  *a = *b;
+  *b = aux;
 }
 
 /***************************************************/
@@ -67,9 +81,9 @@ int* genera_perm(int N)
 {
   int * perm;
   int i=0;
-  int aux = 0, aleat;
 
-  perm = calloc(sizeof(int), N);
+
+  perm = (int *) malloc (N* sizeof(perm[0]));
 
   if(perm == NULL){
     return NULL;
@@ -80,10 +94,7 @@ int* genera_perm(int N)
   }
 
   for(i=0;i<N;i++){
-    aux = perm[i];
-    aleat = aleat_num(i, N-1);
-    perm[i] = perm[aleat];
-    perm[aleat] = aux;
+    swap(&perm[i],&perm[aleat_num(i, N -1)]);
   }
 
   return perm;
