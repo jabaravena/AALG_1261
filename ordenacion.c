@@ -13,12 +13,32 @@
 #include "ordenacion.h"
 
 /***************************************************/
-/* Funcion: InsertSort    Fecha:                   */
-/* Vuestro comentario                              */
+/* Funcion: InsertSort    Fecha: 04/10/2020        */
+/* Autores: Isaac Barriales & Jose A. Bravo        */  
+/* Entrada:                                        */
+/* tabla: puntero a integer que se va a ordenar    */
+/* ip: El primer elemento de la tabla              */
+/* iu: El último elemento de la tabla              */
+/* Salida                                          */
+/* Count: El Nº de veces que se ejecuta la OB      */
 /***************************************************/
 int InsertSort(int* tabla, int ip, int iu)
 {
-  /* vuestro codigo */
+  int i,j;
+  int aux, count=0;
+
+  for(i=ip + 1; i<= iu; i++) {
+    aux = tabla[i];
+    j=i-1;
+    while(j>=ip && tabla[j]>aux) {
+      tabla[j+1] = tabla[j];
+      j--;
+      count++;
+    }
+    tabla[j+1] = aux;
+  }
+
+  return count;
 }
 
 int InsertSortInv(int* tabla, int ip, int iu)
