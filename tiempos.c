@@ -55,7 +55,7 @@ short tiempo_medio_ordenacion(pfunc_ordena metodo,
 
   for(j=0, obs=0, medio=0; j<n_perms; j++) {
     obs = metodo(perms[j], 0, N-1);
-    if(obs == ERR) {
+    if(obs == ERR) {   // ¿Le puedo hacer una funcion auxiliar que libere matrices dinamicas?
       for(i=0; i<n_perms; i++) {
         free(perms[i]);
       }
@@ -103,7 +103,32 @@ short genera_tiempos_ordenacion(pfunc_ordena metodo, char* fichero,
                                 int num_min, int num_max, 
                                 int incr, int n_perms)
 {
-  /* vuestro codigo */
+  PTIEMPO tiempos;
+  int num=0;
+  int i, j;
+
+  //¿control de errores?? por si incr es 0 o si num_max es menor que num_min???
+  num = ((num_max - num_min)/incr) +1;
+
+  tiempos = malloc(num * sizeof(TIEMPO));
+  if(!tiempos) {
+    return ERR;
+  }
+
+  for(j=num_min, i=0; j <= num_max; j+=incr, i++) {
+    if(tiempo_medio_ordenacion(metodo, n_perms, j, tiempos+i) == ERR) {
+      free(tiempos);
+      return ERR;
+    }
+  }
+
+  if(guarda_tabla_tiempos(fichero, tiempos, num)==ERR) {
+    free(tiempos);
+    return ERR;
+  }
+
+  return OK;
+  
 }
 
 /***************************************************/
