@@ -20,6 +20,7 @@
 #endif
 
 #include "ordenacion.h"
+#include <time.h>
 
 /* definiciones de tipos */
 typedef struct tiempo {
