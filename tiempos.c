@@ -33,12 +33,12 @@ short tiempo_medio_ordenacion(pfunc_ordena metodo,
 
   time_t t1, t2;
 
-  //¿control de errores verdad?
+  /*¿control de errores verdad?*/
   if(n_perms <= 0) {
     return ERR;
   }
 
-  //Rellenamos los primeros campos de la estructura
+  /*Rellenamos los primeros campos de la estructura*/
   ptiempo->N = N;
   ptiempo->n_elems = n_perms;
 
@@ -56,7 +56,7 @@ short tiempo_medio_ordenacion(pfunc_ordena metodo,
 
   for(j=0, obs=0, medio=0; j<n_perms; j++) {
     obs = metodo(perms[j], 0, N-1);
-    if(obs == ERR) {   // ¿Le puedo hacer una funcion auxiliar que libere matrices dinamicas?
+    if(obs == ERR) {   /* ¿Le puedo hacer una funcion auxiliar que libere matrices dinamicas?*/
       for(i=0; i<n_perms; i++) {
         free(perms[i]);
       }
@@ -64,22 +64,22 @@ short tiempo_medio_ordenacion(pfunc_ordena metodo,
       return ERR;
     }
 
-    //Calcular el promedio
+    /*Calcular el promedio*/
     medio += (obs/n_perms);
 
-    //Guardamos en una tabla los obs
+    /*Guardamos en una tabla los obs*/
     tabla[j] = obs;
   }
 
   t2 = clock();
 
-  tiempo_total = t2-t1;
-  ptiempo->tiempo = tiempo_total / n_perms;
+  tiempo_total = (double)(t2-t1);
+  ptiempo->tiempo = tiempo_total / (double)n_perms;
 
-  //La variable sumas va a tener el numero promedio de veces que se ejecuta la OB
+  /*La variable sumas va a tener el numero promedio de veces que se ejecuta la OB*/
   ptiempo->medio_ob = medio;
 
-  //Calculamos el maximo y minimo de las obs obtenidas
+  /*Calculamos el maximo y minimo de las obs obtenidas*/
   for(i=1, max=perms[0], min=perms[0]; i<n_perms; i++) {
     if(max < perms[i]) {
       max = perms[i];
@@ -108,7 +108,7 @@ short genera_tiempos_ordenacion(pfunc_ordena metodo, char* fichero,
   int num=0;
   int i, j;
 
-  //¿control de errores?? por si incr es 0 o si num_max es menor que num_min???
+  /*¿control de errores?? por si incr es 0 o si num_max es menor que num_min???*/
   num = ((num_max - num_min)/incr) +1;
 
   tiempos = malloc(num * sizeof(TIEMPO));
