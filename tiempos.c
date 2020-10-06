@@ -82,6 +82,12 @@ short tiempo_medio_ordenacion(pfunc_ordena metodo,
   ptiempo->max_ob = max;
   ptiempo->min_ob = min;
 
+
+  for(i=0; i<n_perms; i++) {
+        free(perms[i]);
+  }
+  free(perms);
+
   return OK;
 }
 
@@ -119,6 +125,8 @@ short genera_tiempos_ordenacion(pfunc_ordena metodo, char* fichero,
     free(tiempos);
     return ERR;
   }
+
+  free(tiempos);
 
   return OK;
   
