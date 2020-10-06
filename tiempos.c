@@ -66,8 +66,6 @@ short tiempo_medio_ordenacion(pfunc_ordena metodo,
     /*Calcular el promedio*/
     medio += (double)obs;
 
-    /*Guardamos en una tabla los obs*/
-    tabla[j] = obs;
   }
 
   t2 = clock();
@@ -99,7 +97,6 @@ short genera_tiempos_ordenacion(pfunc_ordena metodo, char* fichero,
   int num=0;
   int i, j;
 
-  /*¿control de errores?? por si incr es 0 o si num_max es menor que num_min???*/
   num = ((num_max - num_min)/incr) +1;
 
   tiempos = malloc(num * sizeof(TIEMPO));
@@ -107,7 +104,7 @@ short genera_tiempos_ordenacion(pfunc_ordena metodo, char* fichero,
     return ERR;
   }
 
-  for(j=num_min, i=0; j <= num_max; j+=incr, i++) {
+  for(j=num_min, i=0; i<num; j+=incr, i++) {
     if(tiempo_medio_ordenacion(metodo, n_perms, j, tiempos+i) == ERR) {
       free(tiempos);
       return ERR;
