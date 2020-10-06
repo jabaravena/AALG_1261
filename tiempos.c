@@ -13,6 +13,7 @@
 #include "ordenacion.h"
 #include "permutaciones.h"
 #include <stdio.h>
+#include <stdlib.h>
 
 /***************************************************/
 /* Funcion: tiempo_medio_ordenacion Fecha:         */
@@ -131,13 +132,13 @@ short guarda_tabla_tiempos(char* fichero, PTIEMPO tiempo, int n_tiempos)
   FILE * fp;
   int j;
 
-  fp = open(fichero, "w");
+  fp = fopen(fichero, "w");
   if(!fp) {
     return ERR;
   }
 
   for(j=0; j<n_tiempos; j++) {
-    fprintf(fp, "%d %d %d %d %d\n", tiempo[j].N, tiempo[j].tiempo, tiempo[j].medio_ob, tiempo[j].max_ob, tiempo[j].min_ob);
+    fprintf(fp, "%d %f %f %d %d\n", tiempo[j].N, tiempo[j].tiempo, tiempo[j].medio_ob, tiempo[j].max_ob, tiempo[j].min_ob);
   }
 
   fclose(fp);
