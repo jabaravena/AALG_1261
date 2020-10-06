@@ -26,10 +26,9 @@ short tiempo_medio_ordenacion(pfunc_ordena metodo,
                               PTIEMPO ptiempo)
 {
   int ** perms;
-  int * tabla;
   int i, j, obs;
   double tiempo_total, medio;
-  int min, max;
+  int min = __INT_MAX__, max = 0;
 
   time_t t1, t2;
 
@@ -43,10 +42,6 @@ short tiempo_medio_ordenacion(pfunc_ordena metodo,
     return ERR;
   }
 
-  tabla = (int *)malloc(n_perms * sizeof(*tabla));
-  if(!tabla) {
-    return ERR;
-  }
 
   t1 = clock();
 
@@ -58,6 +53,14 @@ short tiempo_medio_ordenacion(pfunc_ordena metodo,
       }
       free(perms);
       return ERR;
+    }
+
+    /*Calcular maximo y minimo*/
+    if(max < obs) {
+      max = obs;
+    }
+    if(min > obs) {
+      min = obs;
     }
 
     /*Calcular el promedio*/
@@ -75,15 +78,7 @@ short tiempo_medio_ordenacion(pfunc_ordena metodo,
   /*La variable medio/n_perms va a tener el numero promedio de veces que se ejecuta la OB*/
   ptiempo->medio_ob = medio/n_perms;
 
-  /*Calculamos el maximo y minimo de las obs obtenidas*/
-  for(i=1, max=perms[0], min=perms[0]; i<n_perms; i++) {
-    if(max < perms[i]) {
-      max = perms[i];
-    }
-    if(min > perms[i]) {
-      min = perms[i];
-    }
-  }
+  
 
   ptiempo->max_ob = max;
   ptiempo->min_ob = min;
