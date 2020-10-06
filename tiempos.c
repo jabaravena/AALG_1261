@@ -110,6 +110,9 @@ short genera_tiempos_ordenacion(pfunc_ordena metodo, char* fichero,
       free(tiempos);
       return ERR;
     }
+    /*Para imprimir por terminal como va avanzando en los calculos...*/
+    fprintf(stdout, "%d %f %f %d %d\n", tiempos[i].N, tiempos[i].tiempo, tiempos[i].medio_ob, tiempos[i].min_ob, tiempos[i].max_ob);
+
   }
 
   if(guarda_tabla_tiempos(fichero, tiempos, num)==ERR) {
@@ -138,7 +141,7 @@ short guarda_tabla_tiempos(char* fichero, PTIEMPO tiempo, int n_tiempos)
   }
 
   for(j=0; j<n_tiempos; j++) {
-    fprintf(fp, "%d %f %f %d %d\n", tiempo[j].N, tiempo[j].tiempo, tiempo[j].medio_ob, tiempo[j].max_ob, tiempo[j].min_ob);
+    fprintf(fp, "%d %f %f %d %d\n", tiempo[j].N, tiempo[j].tiempo, tiempo[j].medio_ob, tiempo[j].min_ob, tiempo[j].max_ob);
   }
 
   fclose(fp);

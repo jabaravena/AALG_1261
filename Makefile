@@ -11,7 +11,7 @@ all : $(EXE)
 
 .PHONY : clean
 clean :
-	rm -f *.o core $(EXE)
+	rm -f *.o core $(EXE) salida.out
 
 $(EXE) : % : %.o ordenacion.o tiempos.o permutaciones.o
 	@echo "#---------------------------"
