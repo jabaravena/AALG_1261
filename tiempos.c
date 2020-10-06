@@ -33,10 +33,6 @@ short tiempo_medio_ordenacion(pfunc_ordena metodo,
 
   time_t t1, t2;
 
-  /*¿control de errores verdad?*/
-  if(n_perms <= 0) {
-    return ERR;
-  }
 
   /*Rellenamos los primeros campos de la estructura*/
   ptiempo->N = N;
@@ -56,7 +52,7 @@ short tiempo_medio_ordenacion(pfunc_ordena metodo,
 
   for(j=0, obs=0, medio=0; j<n_perms; j++) {
     obs = metodo(perms[j], 0, N-1);
-    if(obs == ERR) {   /* ¿Le puedo hacer una funcion auxiliar que libere matrices dinamicas?*/
+    if(obs == ERR) {   
       for(i=0; i<n_perms; i++) {
         free(perms[i]);
       }
@@ -65,7 +61,7 @@ short tiempo_medio_ordenacion(pfunc_ordena metodo,
     }
 
     /*Calcular el promedio*/
-    medio += (obs/n_perms);
+    medio += (double)obs;
 
     /*Guardamos en una tabla los obs*/
     tabla[j] = obs;
@@ -74,10 +70,10 @@ short tiempo_medio_ordenacion(pfunc_ordena metodo,
   t2 = clock();
 
   tiempo_total = (double)(t2-t1);
-  ptiempo->tiempo = tiempo_total / (double)n_perms;
+  ptiempo->tiempo = tiempo_total/n_perms;
 
-  /*La variable sumas va a tener el numero promedio de veces que se ejecuta la OB*/
-  ptiempo->medio_ob = medio;
+  /*La variable medio/n_perms va a tener el numero promedio de veces que se ejecuta la OB*/
+  ptiempo->medio_ob = medio/n_perms;
 
   /*Calculamos el maximo y minimo de las obs obtenidas*/
   for(i=1, max=perms[0], min=perms[0]; i<n_perms; i++) {
