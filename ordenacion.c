@@ -12,16 +12,25 @@
 
 #include "ordenacion.h"
 
-/***************************************************/
-/* Funcion: InsertSort    Fecha: 04/10/2020        */
-/* Autores: Isaac Barriales & Jose A. Bravo        */  
-/* Entrada:                                        */
-/* tabla: puntero a integer que se va a ordenar    */
-/* ip: El indice del primer elemento de la tabla   */
-/* iu: El indice del último elemento de la tabla   */
-/* Salida                                          */
-/* Count: El Nº de veces que se ejecuta la OB      */
-/***************************************************/
+/***********************************************************/
+/* Funcion: InsertSort    Fecha: 04/10/2020                */
+/* Autores: Isaac Barriales & Jose A. Bravo                */
+/*                                                         */
+/* Esta función devuelve el número de veces que            */
+/* se ha ejecutado la OB en el caso de que la              */
+/* tabla se ordene correctamente.                          */
+/* Se ordena mediante el algortimo InsertSort              */  
+/* Entrada:                                                */
+/*     int* tabla: puntero a una tabla que se va a ordenar */
+/*                 tabla != NULL                           */
+/*     int ip: El indice del primer elemento de la tabla   */
+/*                                                         */
+/*     int iu: El indice del último elemento de la tabla   */
+/*                                                         */
+/* Salida                                                  */
+/*     int count: El Nº de veces que se ejecuta la OB      */
+/*                o ERR en caso de error                   */
+/***********************************************************/
 int InsertSort(int* tabla, int ip, int iu)
 {
   int i,j;
@@ -41,6 +50,27 @@ int InsertSort(int* tabla, int ip, int iu)
   return count;
 }
 
+
+/***********************************************************/
+/* Funcion: InsertSortInv    Fecha: 06/10/2020             */
+/* Autores: Isaac Barriales & Jose A. Bravo                */
+/*                                                         */
+/* Esta función devuelve el número de veces que            */
+/* se ha ejecutado la OB en el caso de que la              */
+/* tabla se ordene de mayor a menor correctamente.         */
+/* La tabla se ordena mediante una variación del           */ 
+/* algoritmo de InsertSort                                 */  
+/* Entrada:                                                */
+/*     int* tabla: puntero a una tabla que se va a ordenar */
+/*                 tabla != NULL                           */
+/*     int ip: El indice del primer elemento de la tabla   */
+/*                                                         */
+/*     int iu: El indice del último elemento de la tabla   */
+/*                                                         */
+/* Salida                                                  */
+/*     int count: El Nº de veces que se ejecuta la OB      */
+/*                o ERR en caso de error                   */
+/***********************************************************/
 int InsertSortInv(int* tabla, int ip, int iu)
 {
   int i,j;

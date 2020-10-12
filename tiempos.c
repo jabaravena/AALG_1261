@@ -15,12 +15,32 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-/***************************************************/
-/* Funcion: tiempo_medio_ordenacion Fecha:         */
-/*                                                 */
-/* Vuestra documentacion (formato igual            */
-/* que en el primer apartado):                     */
-/***************************************************/
+/***************************************************************/
+/* Funcion: tiempo_medio_ordenacion       Fecha: 06/10/20      */
+/* Autores: Isaac Barriales & José A. Bravo                    */
+/*                                                             */
+/* Función que ordena n_perms permutaciones de                 */
+/*    tamaño N mediante el método de ordenacion                */
+/*    pfunc_ordena metodo. Guarda los parámetros temporales    */
+/*    en un puntero de tipo TIEMPO.                            */
+/*                                                             */
+/* Entrada:                                                    */
+/*  pfunc_ordena metodo: Puntero a una rutina que implementa   */
+/*                       un algoritmo de ordenación.           */
+/*                       metodo != NULL                        */
+/*  int n_perms: número de permutaciones a generar             */
+/*               n_perms > 0                                   */
+/*  int N: número de elementos de cada permutación             */
+/*         N > 0                                               */
+/*  PTIEMPO tiempo: puntero a una estructura de tipo TIEMPO    */
+/*                  que será modificada con los parámetros     */
+/*                  temporales resultantes de la ordenación    */
+/*                                                             */
+/* Salida:                                                     */
+/*  short: OK si se han ordenado correctamente las             */
+/*         permutaciones y no ha habido ningún error.          */
+/*         ERR si ha habido algún error.                       */ 
+/***************************************************************/
 short tiempo_medio_ordenacion(pfunc_ordena metodo, 
                               int n_perms,
                               int N, 
@@ -91,11 +111,37 @@ short tiempo_medio_ordenacion(pfunc_ordena metodo,
   return OK;
 }
 
-/***************************************************/
-/* Funcion: genera_tiempos_ordenacion Fecha:       */
-/*                                                 */
-/* Vuestra documentacion                           */
-/***************************************************/
+/***************************************************************/
+/* Funcion: Genera_tiempos_ordenacion       Fecha: 06/10/20    */
+/* Autores: Isaac Barriales & José A. Bravo                    */
+/*                                                             */
+/* Función que escribe en el fichero fichero los tiempos       */
+/* medios, y los números promedio, mı́nimo y máximo de veces    */
+/* que se ejecuta la OB en la ejecución del algoritmo de       */
+/* ordenación metodo con n_perms permutaciones de tamaños      */
+/* en el rango desde num_min hasta num_max, ambos incluidos,   */
+/* usando incrementos de tamaño incr.                          */
+/*                                                             */
+/* Entrada:                                                    */
+/*  pfunc_ordena metodo: Puntero a una rutina que implementa   */
+/*                       un algoritmo de ordenación.           */
+/*                       metodo != NULL                        */
+/*  char* fichero: String con el nombre del fichero de         */
+/*                   salida. Este fichero contendrá una tabla  */
+/*                   con los tiempos de ejecución.             */
+/*  int n_perms: número de permutaciones a generar             */
+/*               n_perms > 0                                   */
+/*  int N: número de elementos de cada permutación             */
+/*         N > 0                                               */
+/*  PTIEMPO tiempo: puntero a una estructura de tipo TIEMPO    */
+/*                  que será modificada con los parámetros     */
+/*                  temporales resultantes de la ordenación    */
+/*                                                             */
+/* Salida:                                                     */
+/*  short: OK si se han ordenado correctamente las             */
+/*         permutaciones y no ha habido ningún error.          */
+/*         ERR si ha habido algún error.                       */ 
+/***************************************************************/
 short genera_tiempos_ordenacion(pfunc_ordena metodo, char* fichero, 
                                 int num_min, int num_max, 
                                 int incr, int n_perms)
