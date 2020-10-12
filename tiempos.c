@@ -72,7 +72,7 @@ short tiempo_medio_ordenacion(pfunc_ordena metodo,
   t2 = clock();
 
   tiempo_total = (double)(t2-t1);
-  ptiempo->tiempo = tiempo_total/n_perms;
+  ptiempo->tiempo = tiempo_total/n_perms/CLOCKS_PER_SEC;
 
   /*La variable medio/n_perms va a tener el numero promedio de veces que se ejecuta la OB*/
   ptiempo->medio_ob = medio/n_perms;
