@@ -14,15 +14,15 @@
 #include <stdlib.h>
 
 /***************************************************/
-/* Funcion: aleat_num Fecha:27/09/2020             */
+/* Funcion: aleat_num            Fecha:27/09/2020  */
 /* Autores: Isaac Barriales Y Jose Antonio Bravo   */
 /*                                                 */
 /* Rutina que genera un numero aleatorio           */
 /* entre dos numeros dados, ambos inclusive        */
 /*                                                 */
 /* Entrada:                                        */
-/* int inf: limite inferior                        */
-/* int sup: limite superior                        */
+/*   int inf: limite inferior                      */
+/*   int sup: limite superior                      */
 /*                                                 */
 /* limite inferior siempre mayor que 0             */
 /* limite superior siempre mayor que 0             */
@@ -30,13 +30,12 @@
 /*   limite inferior                               */
 /*                                                 */
 /* Salida:                                         */
-/* int: numero aleatorio en inf y sup              */
+/*   int: numero aleatorio en inf y sup            */
 /***************************************************/
 int aleat_num(int inf, int sup)
 {
 
   int aleatBig = 0, aleat2 = 0, aleatFinal = 0;
-
 
   aleatBig = rand();
 
@@ -44,19 +43,18 @@ int aleat_num(int inf, int sup)
   aleatFinal = aleat2 + inf;
 
   return aleatFinal;
-
 }
 
 /***************************************************/
-/* Funcion: swap Fecha: 04/10/2020                 */
+/* Funcion: swap                Fecha: 04/10/2020  */
 /* Autores: Isaac Barriales Y Jose Antonio Bravo   */
 /*                                                 */
-/* Función que intercambia el contenido           */
+/* Función que intercambia el contenido            */
 /* de dos punteros integer                         */
 /*                                                 */
 /* Entrada:                                        */
-/* int a: Dirección del primer número a cambiar    */
-/* int b: Dirección del segundo número a cambiar   */
+/*   int a: Dirección del primer número a cambiar  */
+/*   int b: Dirección del segundo número a cambiar */
 /***************************************************/
 void swap(int* a, int *b){
   int aux = *a;
@@ -65,20 +63,21 @@ void swap(int* a, int *b){
   *b = aux;
 }
 
+
 /***************************************************/
-/* Funcion: genera_perm Fecha: 27/09/2020          */
+/* Funcion: genera_perm          Fecha: 27/09/2020 */
 /* Autores: Isaac Barriales Y Jose Antonio Bravo   */
 /*                                                 */
 /* Rutina que genera una permutacion               */
 /* aleatoria de N elementos                        */
 /*                                                 */
 /* Entrada:                                        */
-/* int N: Numero de elementos de la                */
+/*   int N: Numero de elementos de la              */
 /*        permutacion, donde N>0                   */
 /* Salida:                                         */
-/* int *: puntero a un array de enteros            */
-/*        que contiene a la permutacion            */
-/*        o NULL en caso de error                  */
+/*   int *: puntero a un array de enteros          */
+/*          que contiene a la permutacion          */
+/*          o NULL en caso de error                */
 /***************************************************/
 int* genera_perm(int N)
 {
@@ -104,23 +103,24 @@ int* genera_perm(int N)
 
 }
 
+
 /***************************************************/
-/* Funcion: genera_permutaciones Fecha:  04/10/20  */
+/* Funcion: genera_permutaciones   Fecha: 04/10/20 */
 /* Autores: Isaac Barriales & Jose A. Bravo        */
 /*                                                 */
 /* Funcion que genera n_perms permutaciones        */
 /* aleatorias de tamanio N                         */
 /*                                                 */
 /* Entrada:                                        */
-/* int n_perms: Numero de permutaciones            */
-/*              n_perms > 0                        */
-/* int N: Numero de elementos de cada              */
-/*        permutacion. N debe ser mayor que 0      */
+/*   int n_perms: Numero de permutaciones          */
+/*                n_perms > 0                      */
+/*   int N: Numero de elementos de cada            */
+/*          permutacion. N debe ser mayor que 0    */
 /* Salida:                                         */
-/* int**: Array de punteros a enteros              */
-/*        que apuntan a cada una de las            */
-/*        permutaciones                            */
-/*        NULL en caso de error                    */
+/*   int**: Array de punteros a enteros            */
+/*          que apuntan a cada una de las          */
+/*          permutaciones.                         */
+/*          NULL en caso de error                  */
 /***************************************************/
 int** genera_permutaciones(int n_perms, int N)
 {
@@ -131,8 +131,7 @@ int** genera_permutaciones(int n_perms, int N)
   if(!perm) {
     return NULL;
   }
-  
-  
+    
   for(i=0;i<n_perms;i++){
     perm[i] = genera_perm(N);
     if(!perm[i]) {
@@ -145,6 +144,4 @@ int** genera_permutaciones(int n_perms, int N)
   }
   
   return perm;
-
-
 }

@@ -53,7 +53,6 @@ short tiempo_medio_ordenacion(pfunc_ordena metodo,
 
   time_t t1, t2;
 
-
   /*Rellenamos los primeros campos de la estructura*/
   ptiempo->N = N;
   ptiempo->n_elems = n_perms;
@@ -62,7 +61,6 @@ short tiempo_medio_ordenacion(pfunc_ordena metodo,
   if(!perms) {
     return ERR;
   }
-
 
   t1 = clock();
 
@@ -86,7 +84,6 @@ short tiempo_medio_ordenacion(pfunc_ordena metodo,
 
     /*Calcular el promedio*/
     medio += (double)obs;
-
   }
 
   t2 = clock();
@@ -96,8 +93,6 @@ short tiempo_medio_ordenacion(pfunc_ordena metodo,
 
   /*La variable medio/n_perms va a tener el numero promedio de veces que se ejecuta la OB*/
   ptiempo->medio_ob = medio/n_perms;
-
-  
 
   ptiempo->max_ob = max;
   ptiempo->min_ob = min;
@@ -127,19 +122,21 @@ short tiempo_medio_ordenacion(pfunc_ordena metodo,
 /*                       un algoritmo de ordenación.           */
 /*                       metodo != NULL                        */
 /*  char* fichero: String con el nombre del fichero de         */
-/*                   salida. Este fichero contendrá una tabla  */
-/*                   con los tiempos de ejecución.             */
-/*  int n_perms: número de permutaciones a generar             */
-/*               n_perms > 0                                   */
-/*  int N: número de elementos de cada permutación             */
-/*         N > 0                                               */
-/*  PTIEMPO tiempo: puntero a una estructura de tipo TIEMPO    */
-/*                  que será modificada con los parámetros     */
-/*                  temporales resultantes de la ordenación    */
-/*                                                             */
+/*                 salida. En este fichero se escribirá        */
+/*                 una tabla con los tiempos de ejecución.     */
+/*                 fichero != NULL                             */
+/*  int num_min: Tamaño minimo de las permutaciones            */
+/*               num_min > 0                                   */
+/*  int num_max: Tamaño máximo de las permutaciones            */
+/*               num_max > num_min                             */
+/*  int incr: Valor del incremento para el rango de tamaños    */
+/*            entre num_min y num_max.                         */
+/*  int n_perms: Número de permutaciones que se ordenarán      */
+/*               para cada valor de tamaños entre              */
+/*               num_min y num_max                             */
 /* Salida:                                                     */
 /*  short: OK si se han ordenado correctamente las             */
-/*         permutaciones y no ha habido ningún error.          */
+/*         permutaciones e impreso los tiempos en el fichero.  */
 /*         ERR si ha habido algún error.                       */ 
 /***************************************************************/
 short genera_tiempos_ordenacion(pfunc_ordena metodo, char* fichero, 
@@ -178,12 +175,28 @@ short genera_tiempos_ordenacion(pfunc_ordena metodo, char* fichero,
   
 }
 
-/***************************************************/
-/* Funcion: guarda_tabla_tiempos Fecha:            */
-/*                                                 */
-/* Vuestra documentacion (formato igual            */
-/* que en el primer apartado):                     */
-/***************************************************/
+/***************************************************************/
+/* Funcion: guarda_tabla_tiempos             Fecha: 07/10/20   */
+/* Autores: Isaac Barriales & José A. Bravo                    */
+/*                                                             */
+/* Función que permite guardar en un fichero de texto          */
+/* los n_tiempos que contiene el puntero a la estructura       */
+/* TIEMPO tiempo.                                              */
+/*                                                             */
+/* Entrada:                                                    */
+/*  char* fichero: String con el nombre del fichero de         */
+/*                 salida. En este fichero se escribirá        */
+/*                 una tabla con los tiempos de ejecución.     */
+/*                 fichero != NULL                             */
+/*  PTIEMPO tiempo: Puntero de tipo TIEMPO que apunta a un     */
+/*                  array con 'n_tiempos' tiempos de           */
+/*                  ejecución para distintos tamaños.          */
+/*  int n_tiempos: Es el número de elementos del array tiempo  */
+/*                                                             */
+/* Salida:                                                     */
+/*  short: OK si se han impreso los tiempos en el fichero.     */
+/*         ERR si ha habido algún error.                       */ 
+/***************************************************************/
 short guarda_tabla_tiempos(char* fichero, PTIEMPO tiempo, int n_tiempos)
 {
   FILE * fp;

@@ -13,7 +13,7 @@
 #include "ordenacion.h"
 
 /***********************************************************/
-/* Funcion: InsertSort    Fecha: 04/10/2020                */
+/* Funcion: InsertSort                  Fecha: 04/10/2020  */
 /* Autores: Isaac Barriales & Jose A. Bravo                */
 /*                                                         */
 /* Esta función devuelve el número de veces que            */
@@ -52,7 +52,7 @@ int InsertSort(int* tabla, int ip, int iu)
 
 
 /***********************************************************/
-/* Funcion: InsertSortInv    Fecha: 06/10/2020             */
+/* Funcion: InsertSortInv              Fecha: 06/10/2020   */
 /* Autores: Isaac Barriales & Jose A. Bravo                */
 /*                                                         */
 /* Esta función devuelve el número de veces que            */
