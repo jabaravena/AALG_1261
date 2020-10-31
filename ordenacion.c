@@ -96,31 +96,36 @@ int InsertSortInv(int* tabla, int ip, int iu)
 int mergesort(int* tabla, int ip, int iu) {
   int med = 0;
   int obs = 0;
-  int mer = 0;
+  int mer = 0, ret1=0, ret2=0;
+
   /*No pongo el primer CdE del pscodigo pq lo diré en la cabecera*/
-  if(!tabla) {
-    return ERR;
-    /*Este CdE lo hago pq como vamos a llamar a más MergeSorts y estos llaman
-    a Merge/Combinar y esta rutina utiliza memoria dinamica, la cual puede 
-    fallar; pues hago este control de errores;
-    Esto es un poco lío, lo iré vienod mientras avance*/
-  }
+  /*No pongo CdE para tabla pq nunca debe ser NULL, tampoco si en
+  combinar fallara la reserva de memoria*/
 
   if(ip == iu) {
     return 0;
   }
 
   med = (iu - ip) / 2;
-  obs = mergesort(tabla, ip, med);
-  obs += mergesort(tabla, med + 1, iu);
+  ret1 = mergesort(tabla, ip, med);
+  if(ret1 == ERR) {
+    return ERR;
+  }
+  obs += ret1;
+
+  ret2 = mergesort(tabla, med + 1, iu);
+  if(ret2 == ERR) {
+    return ERR;
+  }
+  obs += ret2;
+
   mer = merge(tabla, ip, iu, med);
 
   if(ERR == mer) {
-    /*algo que libere o yo que sé*/
+    return ERR;
   }
-  else {
-    obs += mer;
-  }
+  obs += mer;
+  
   return obs;
 }
 
