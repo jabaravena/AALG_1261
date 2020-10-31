@@ -27,5 +27,10 @@ typedef int (* pfunc_ordena)(int*, int, int);
 int InsertSort(int* tabla, int ip, int iu);
 int InsertSortInv(int* tabla, int ip, int iu);
 
+/*Práctica 2*/
+
+int mergesort(int* tabla, int ip, int iu);
+int merge(int* tabla, int ip, int iu, int imedio);
+
 
 #endif

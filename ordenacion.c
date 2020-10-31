@@ -11,6 +11,9 @@
 
 
 #include "ordenacion.h"
+#include <stdlib.h>
+
+void copy(int * tabla, int * aux, int ip, int iu);
 
 /***********************************************************/
 /* Funcion: InsertSort                  Fecha: 04/10/2020  */
@@ -107,13 +110,13 @@ int mergesort(int* tabla, int ip, int iu) {
   }
 
   med = (iu - ip) / 2;
-  ret1 = mergesort(tabla, ip, med);
+  ret1 = mergesort(tabla, ip, ip + med);
   if(ret1 == ERR) {
     return ERR;
   }
   obs += ret1;
 
-  ret2 = mergesort(tabla, med + 1, iu);
+  ret2 = mergesort(tabla, ip + med + 1, iu);
   if(ret2 == ERR) {
     return ERR;
   }
@@ -136,14 +139,14 @@ int merge(int* tabla, int ip, int iu, int imedio) {
   int i,j,k;
   int obs=0;
 
-  aux = malloc(iu - ip +1);
+  aux = (int *) malloc((iu - ip +1)*sizeof(int));
   if(!aux) {
     return ERR;
     /*Yo creo que tendré que devolver -1 pq ERR no es int, right??*/
   }
 
 
-  for(i=ip, j=imedio+1, k=0; i<= imedio && j<= iu; k++, obs++) {
+  for(i=ip, j=ip +imedio +1, k=0; i<= ip +imedio && j<= iu; k++, obs++) {
     if(tabla[i] < tabla[j]) {
       aux[k] = tabla[i];
       i++;
@@ -160,7 +163,7 @@ int merge(int* tabla, int ip, int iu, int imedio) {
     aux[k] = tabla[j];
 
   /*Si la primera mitad se agotó los elementos, no entra*/
-  for(; i<= imedio; i++, k++)
+  for(; i<= ip+imedio; i++, k++)
     aux[k] = tabla[i];
 
   copy(tabla, aux, ip, iu);
