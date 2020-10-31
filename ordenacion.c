@@ -137,11 +137,8 @@ int merge(int* tabla, int ip, int iu, int imedio) {
     /*Yo creo que tendré que devolver -1 pq ERR no es int, right??*/
   }
 
-  i = ip;
-  j = imedio +1;
-  k = 0;
 
-  while(i <= imedio && j <= iu) {
+  for(i=ip, j=imedio+1, k=0; i<= imedio && j<= iu; k++, obs++) {
     if(tabla[i] < tabla[j]) {
       aux[k] = tabla[i];
       i++;
@@ -150,24 +147,31 @@ int merge(int* tabla, int ip, int iu, int imedio) {
       aux[k] = tabla[j];
       j++;
     }
-    k++;
-    obs++;
   }
 
-  while(j <= iu) {
+  /*Pasa a aux los restantes elementos de la tabla*/
+  /*Si la segunda mitad se agotó no entra en el for*/
+  for(; j<= iu; j++, k++) 
     aux[k] = tabla[j];
-    j++;
-    k++;
-  }
 
-  while(i <= imedio) {
+  /*Si la primera mitad se agotó los elementos, no entra*/
+  for(; i<= imedio; i++, k++)
     aux[k] = tabla[i];
-    i++;
-    k++;
-  }
 
   copy(tabla, aux, ip, iu);
   free(aux);
 
   return obs;
+}
+
+
+/*Cabecera*/
+void copy(int * tabla, int * aux, int ip, int iu) {
+  int i = 0;
+
+  for(i=0; i <= iu-ip; i++) {
+    tabla[ip + i] = aux[i];
+  }
+
+  return;
 }
