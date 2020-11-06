@@ -95,15 +95,30 @@ int InsertSortInv(int* tabla, int ip, int iu)
 
 
 
-/*CABECERA*/
+/***********************************************************/
+/* Funcion: mergesort                   Fecha: 02/11/2020  */
+/* Autores: Isaac Barriales & Jose A. Bravo                */
+/*                                                         */
+/* Esta función devuelve el número de veces que            */
+/* se ha ejecutado la OB en el caso de que la              */
+/* tabla se ordene correctamente.                          */
+/* Se ordena mediante el algortimo mergesort               */  
+/* Entrada:                                                */
+/*     int* tabla: puntero a una tabla que se va a ordenar */
+/*                 tabla != NULL                           */
+/*     int ip: El indice del primer elemento de la tabla   */
+/*                                                         */
+/*     int iu: El indice del último elemento de la tabla   */
+/*                                                         */
+/* Salida                                                  */
+/*     int obs: El Nº de veces que se ejecuta la OB        */
+/*                o ERR en caso de error                   */
+/***********************************************************/
 int mergesort(int* tabla, int ip, int iu) {
   int med = 0;
   int obs = 0;
   int mer = 0, ret1=0, ret2=0;
 
-  /*No pongo el primer CdE del pscodigo pq lo diré en la cabecera*/
-  /*No pongo CdE para tabla pq nunca debe ser NULL, tampoco si en
-  combinar fallara la reserva de memoria*/
 
   if(ip == iu) {
     return 0;
@@ -133,17 +148,33 @@ int mergesort(int* tabla, int ip, int iu) {
 }
 
 
-/*CABECERA*/
+/***********************************************************/
+/* Funcion: Merge                       Fecha: 02/11/2020  */
+/* Autores: Isaac Barriales & Jose A. Bravo                */
+/*                                                         */
+/* Esta función devuelve el número de veces que            */
+/* se ha ejecutado la OB en el caso de que la              */
+/* tabla se ordene correctamente.                          */  
+/* Entrada:                                                */
+/*     int* tabla: puntero a una tabla que se va a ordenar */
+/*                 tabla != NULL                           */
+/*     int ip: El indice del primer elemento de la tabla   */
+/*                                                         */
+/*     int iu: El indice del último elemento de la tabla   */
+/*     int imedio: El indice del elemento medio de la tabla*/
+/*                                                         */
+/* Salida                                                  */
+/*     int obs: El Nº de veces que se ejecuta la OB        */
+/*                o ERR en caso de error                   */
+/***********************************************************/
 int merge(int* tabla, int ip, int iu, int imedio) {
   int * aux;
   int i,j,k;
   int obs=0;
 
   aux = (int *) malloc((iu - ip +1)*sizeof(int));
-  if(!aux) {
+  if(!aux) 
     return ERR;
-    /*Yo creo que tendré que devolver -1 pq ERR no es int, right??*/
-  }
 
 
   for(i=ip, j=ip +imedio +1, k=0; i<= ip +imedio && j<= iu; k++, obs++) {
@@ -157,12 +188,9 @@ int merge(int* tabla, int ip, int iu, int imedio) {
     }
   }
 
-  /*Pasa a aux los restantes elementos de la tabla*/
-  /*Si la segunda mitad se agotó no entra en el for*/
   for(; j<= iu; j++, k++) 
     aux[k] = tabla[j];
 
-  /*Si la primera mitad se agotó los elementos, no entra*/
   for(; i<= ip+imedio; i++, k++)
     aux[k] = tabla[i];
 
@@ -173,7 +201,21 @@ int merge(int* tabla, int ip, int iu, int imedio) {
 }
 
 
-/*Cabecera*/
+/***********************************************************/
+/* Funcion: copy                      Fecha: 02/11/2020    */
+/* Autores: Isaac Barriales & Jose A. Bravo                */
+/*                                                         */
+/* Esta función copia en la tabla 'tabla' los elementos    */
+/* de la tabla aux en sus respectivos índices              */
+/*                                                         */  
+/* Entrada:                                                */
+/*     int* tabla: puntero a una tabla que se va a ordenar */
+/*                 tabla != NULL                           */
+/*     int ip: El indice del primer elemento de la tabla   */
+/*                                                         */
+/*     int iu: El indice del último elemento de la tabla   */
+/*     int* aux: puntero a una tabla auxiliar ordenada     */
+/***********************************************************/
 void copy(int * tabla, int * aux, int ip, int iu) {
   int i = 0;
 
