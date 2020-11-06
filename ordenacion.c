@@ -14,6 +14,7 @@
 #include <stdlib.h>
 
 void copy(int * tabla, int * aux, int ip, int iu);
+void swap(int* a, int *b);
 
 /***********************************************************/
 /* Funcion: InsertSort                  Fecha: 04/10/2020  */
@@ -201,6 +202,7 @@ int merge(int* tabla, int ip, int iu, int imedio) {
 }
 
 
+
 /***********************************************************/
 /* Funcion: copy                      Fecha: 02/11/2020    */
 /* Autores: Isaac Barriales & Jose A. Bravo                */
@@ -224,4 +226,83 @@ void copy(int * tabla, int * aux, int ip, int iu) {
   }
 
   return;
+}
+
+
+/*CABECERA*/
+int quicksort(int* tabla, int ip, int iu) {
+  int m;
+  int ob1, ob2, ob3;
+
+  if (ip == iu) {
+    return 0;
+  }
+
+  ob1 = partir(tabla, ip, iu, &m); 
+  if (ob1 == ERR)
+    return ERR;
+
+  if (ip < m-1)
+    ob2 = quicksort(tabla, ip, m-1);
+    if (ob2 == ERR)
+      return ERR;
+
+  if (m+1 < iu)
+    ob3 = quicksort(tabla, m+1, iu);
+    if (ob3 == ERR)
+      return ERR;
+  
+  return ob1+ob2+ob3;
+}
+
+
+/*CABECERA*/
+int partir(int* tabla, int ip, int iu, int* pos) {
+  int i, k;
+  int obs;
+
+  if ( ERR == medio(tabla, ip, iu, &pos) )
+    return ERR;
+  k = tabla[*pos];
+
+  swap(&tabla[ip], &tabla[*pos]);
+
+  for (i=ip +1, obs = 0; i <= iu; i++, obs++) {
+    if (tabla[i] < k) {
+      (*pos)++;
+      swap(&tabla[i], &tabla[*pos]);
+    }
+  }
+
+  swap(&tabla[ip], &tabla[*pos]);
+
+  return obs;
+}
+
+
+/*CABECERA*/
+int medio(int* tabla, int ip, int iu, int *pos) {
+
+  *pos = ip;
+  
+  return 0;
+}
+
+
+/***************************************************/
+/* Funcion: swap                Fecha: 04/10/2020  */
+/* Autores: Isaac Barriales Y Jose Antonio Bravo   */
+/*                                                 */
+/* Función que intercambia el contenido            */
+/* de dos punteros integer                         */
+/*                                                 */
+/* Entrada:                                        */
+/*   int a: Dirección del primer número a cambiar  */
+/*   int b: Dirección del segundo número a cambiar */
+/***************************************************/
+void swap(int* a, int *b){
+  int aux = *a;
+
+  *a = *b;
+  *b = aux;
 }
