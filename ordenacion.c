@@ -11,10 +11,14 @@
 
 
 #include "ordenacion.h"
+#include "permutaciones.h"
 #include <stdlib.h>
 
 void copy(int * tabla, int * aux, int ip, int iu);
-void swap(int* a, int *b);
+int partir(int* tabla, int ip, int iu, int* pos);
+int medio(int* tabla, int ip, int iu, int *pos);
+
+
 
 /***********************************************************/
 /* Funcion: InsertSort                  Fecha: 04/10/2020  */
@@ -242,15 +246,17 @@ int quicksort(int* tabla, int ip, int iu) {
   if (ob1 == ERR)
     return ERR;
 
-  if (ip < m-1)
+  if (ip < m-1){
     ob2 = quicksort(tabla, ip, m-1);
     if (ob2 == ERR)
       return ERR;
+  }
 
-  if (m+1 < iu)
+  if (m+1 < iu){
     ob3 = quicksort(tabla, m+1, iu);
     if (ob3 == ERR)
       return ERR;
+  }
   
   return ob1+ob2+ob3;
 }
@@ -261,7 +267,7 @@ int partir(int* tabla, int ip, int iu, int* pos) {
   int i, k;
   int obs;
 
-  if ( ERR == medio(tabla, ip, iu, &pos) )
+  if ( ERR == medio(tabla, ip, iu, pos) )
     return ERR;
   k = tabla[*pos];
 
@@ -289,20 +295,3 @@ int medio(int* tabla, int ip, int iu, int *pos) {
 }
 
 
-/***************************************************/
-/* Funcion: swap                Fecha: 04/10/2020  */
-/* Autores: Isaac Barriales Y Jose Antonio Bravo   */
-/*                                                 */
-/* Función que intercambia el contenido            */
-/* de dos punteros integer                         */
-/*                                                 */
-/* Entrada:                                        */
-/*   int a: Dirección del primer número a cambiar  */
-/*   int b: Dirección del segundo número a cambiar */
-/***************************************************/
-void swap(int* a, int *b){
-  int aux = *a;
-
-  *a = *b;
-  *b = aux;
-}

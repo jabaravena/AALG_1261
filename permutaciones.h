@@ -22,5 +22,6 @@
 int aleat_num(int inf, int sup);
 int* genera_perm(int N);
 int** genera_permutaciones(int n_perms, int N);
+void swap(int* a, int *b);
 
 #endif
