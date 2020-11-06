@@ -125,26 +125,26 @@ int mergesort(int* tabla, int ip, int iu) {
   int mer = 0, ret1=0, ret2=0;
 
 
-  if(ip == iu) {
+  if (ip == iu) {
     return 0;
   }
 
   med = (iu - ip) / 2;
   ret1 = mergesort(tabla, ip, ip + med);
-  if(ret1 == ERR) {
+  if (ret1 == ERR) {
     return ERR;
   }
   obs += ret1;
 
   ret2 = mergesort(tabla, ip + med + 1, iu);
-  if(ret2 == ERR) {
+  if (ret2 == ERR) {
     return ERR;
   }
   obs += ret2;
 
   mer = merge(tabla, ip, iu, med);
 
-  if(ERR == mer) {
+  if (ERR == mer) {
     return ERR;
   }
   obs += mer;
@@ -178,12 +178,12 @@ int merge(int* tabla, int ip, int iu, int imedio) {
   int obs=0;
 
   aux = (int *) malloc((iu - ip +1)*sizeof(int));
-  if(!aux) 
+  if (aux == NULL) 
     return ERR;
 
 
-  for(i=ip, j=ip +imedio +1, k=0; i<= ip +imedio && j<= iu; k++, obs++) {
-    if(tabla[i] < tabla[j]) {
+  for (i=ip, j=ip +imedio +1, k=0; i<= ip +imedio && j<= iu; k++, obs++) {
+    if (tabla[i] < tabla[j]) {
       aux[k] = tabla[i];
       i++;
     }
@@ -193,10 +193,10 @@ int merge(int* tabla, int ip, int iu, int imedio) {
     }
   }
 
-  for(; j<= iu; j++, k++) 
+  for (; j<= iu; j++, k++) 
     aux[k] = tabla[j];
 
-  for(; i<= ip+imedio; i++, k++)
+  for (; i<= ip+imedio; i++, k++)
     aux[k] = tabla[i];
 
   copy(tabla, aux, ip, iu);
@@ -259,6 +259,29 @@ int quicksort(int* tabla, int ip, int iu) {
   }
   
   return ob1+ob2+ob3;
+}
+
+/*CABECERA*/
+int quicksort_src(int* tabla, int ip, int iu) {
+  int m;
+  int ob1 = 0, ob2 = 0;
+
+  while (ip < iu) {
+    ob1 += partir(tabla, ip, iu, &m);
+    if (ob1 == ERR)
+      return ERR;
+    
+    if (ip < m-1){
+      ob2 += quicksort_src(tabla, ip, m-1);
+      if (ob2 == ERR)
+        return ERR;
+    }
+
+    if (m+1 < iu)
+      ip = m + 1;
+  }
+
+  return ob1 + ob2;
 }
 
 
