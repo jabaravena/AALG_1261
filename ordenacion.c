@@ -235,13 +235,12 @@ void copy(int * tabla, int * aux, int ip, int iu) {
 
 /*CABECERA*/
 int quicksort(int* tabla, int ip, int iu) {
-  int m;
-  int ob1, ob2, ob3;
+  int m=0;
+  int ob1=0, ob2=0, ob3=0;
 
-  if (ip == iu) {
+  if (ip == iu) 
     return 0;
-  }
-
+  
   ob1 = partir(tabla, ip, iu, &m); 
   if (ob1 == ERR)
     return ERR;
