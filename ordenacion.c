@@ -270,14 +270,13 @@ int quicksort_src(int* tabla, int ip, int iu) {
     if (ob1 == ERR)
       return ERR;
     
-    if (ip < m-1){
+    if (ip < m-1) {
       ob2 += quicksort_src(tabla, ip, m-1);
       if (ob2 == ERR)
         return ERR;
     }
-
-    if (m+1 < iu)
-      ip = m + 1;
+  
+    ip = m + 1;
   }
 
   return ob1 + ob2;
