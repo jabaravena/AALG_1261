@@ -263,23 +263,25 @@ int quicksort(int* tabla, int ip, int iu) {
 /*CABECERA*/
 int quicksort_src(int* tabla, int ip, int iu) {
   int m;
-  int ob1 = 0, ob2 = 0;
+  int obs = 0, ret = 0;
 
   while (ip < iu) {
-    ob1 += partir(tabla, ip, iu, &m);
-    if (ob1 == ERR)
+    ret = partir(tabla, ip, iu, &m);
+    if (ret == ERR)
       return ERR;
     
+    obs += ret;
     if (ip < m-1) {
-      ob2 += quicksort_src(tabla, ip, m-1);
-      if (ob2 == ERR)
+      ret = quicksort_src(tabla, ip, m-1);
+      if (ret == ERR)
         return ERR;
     }
+    obs += ret;
   
     ip = m + 1;
   }
 
-  return ob1 + ob2;
+  return obs;
 }
 
 
