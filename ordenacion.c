@@ -125,28 +125,27 @@ int mergesort(int* tabla, int ip, int iu) {
   int mer = 0, ret1=0, ret2=0;
 
 
-  if (ip == iu) {
+  if (ip == iu) 
     return 0;
-  }
-
+  
   med = (iu - ip) / 2;
   ret1 = mergesort(tabla, ip, ip + med);
-  if (ret1 == ERR) {
+  if (ret1 == ERR) 
     return ERR;
-  }
+  
   obs += ret1;
 
   ret2 = mergesort(tabla, ip + med + 1, iu);
-  if (ret2 == ERR) {
+  if (ret2 == ERR) 
     return ERR;
-  }
+  
   obs += ret2;
 
   mer = merge(tabla, ip, iu, med);
 
-  if (ERR == mer) {
+  if (ERR == mer) 
     return ERR;
-  }
+  
   obs += mer;
   
   return obs;
@@ -208,7 +207,7 @@ int merge(int* tabla, int ip, int iu, int imedio) {
 
 
 /***********************************************************/
-/* Funcion: copy                      Fecha: 02/11/2020    */
+/* Funcion: copy                        Fecha: 02/11/2020  */
 /* Autores: Isaac Barriales & Jose A. Bravo                */
 /*                                                         */
 /* Esta función copia en la tabla 'tabla' los elementos    */
@@ -225,15 +224,33 @@ int merge(int* tabla, int ip, int iu, int imedio) {
 void copy(int * tabla, int * aux, int ip, int iu) {
   int i = 0;
 
-  for(i=0; i <= iu-ip; i++) {
+  for(i=0; i <= iu-ip; i++) 
     tabla[ip + i] = aux[i];
-  }
+  
 
   return;
 }
 
 
-/*CABECERA*/
+/***********************************************************/
+/* Funcion: QuickSort                   Fecha: 06/11/2020  */
+/* Autores: Isaac Barriales & Jose A. Bravo                */
+/*                                                         */
+/* Esta función devuelve el número de veces que            */
+/* se ha ejecutado la OB en el caso de que la              */
+/* tabla se ordene correctamente.                          */
+/* Se ordena mediante el algortimo QuickSort               */  
+/* Entrada:                                                */
+/*     int* tabla: puntero a una tabla que se va a ordenar */
+/*                 tabla != NULL                           */
+/*     int ip: El indice del primer elemento de la tabla   */
+/*                                                         */
+/*     int iu: El indice del último elemento de la tabla   */
+/*                                                         */
+/* Salida                                                  */
+/*     int obs: El Nº de veces que se ejecuta la OB        */
+/*                o ERR en caso de error                   */
+/***********************************************************/
 int quicksort(int* tabla, int ip, int iu) {
   int m=0;
   int ob1=0, ob2=0, ob3=0;
@@ -260,7 +277,26 @@ int quicksort(int* tabla, int ip, int iu) {
   return ob1+ob2+ob3;
 }
 
-/*CABECERA*/
+/***********************************************************/
+/* Funcion: quicksort_src               Fecha: 06/11/2020  */
+/* Autores: Isaac Barriales & Jose A. Bravo                */
+/*                                                         */
+/* Esta función devuelve el número de veces que            */
+/* se ha ejecutado la OB en el caso de que la              */
+/* tabla se ordene correctamente.                          */
+/* Se ordena mediante el algortimo QuickSort               */
+/* sin recursion de cola                                   */  
+/* Entrada:                                                */
+/*     int* tabla: puntero a una tabla que se va a ordenar */
+/*                 tabla != NULL                           */
+/*     int ip: El indice del primer elemento de la tabla   */
+/*                                                         */
+/*     int iu: El indice del último elemento de la tabla   */
+/*                                                         */
+/* Salida                                                  */
+/*     int obs: El Nº de veces que se ejecuta la OB        */
+/*                o ERR en caso de error                   */
+/***********************************************************/
 int quicksort_src(int* tabla, int ip, int iu) {
   int m;
   int obs = 0, ret = 0;
@@ -271,11 +307,10 @@ int quicksort_src(int* tabla, int ip, int iu) {
       return ERR;
     
     obs += ret;
-    if (ip < m-1) {
-      ret = quicksort_src(tabla, ip, m-1);
-      if (ret == ERR)
-        return ERR;
-    }
+    ret = quicksort_src(tabla, ip, m-1);
+    if (ret == ERR)
+      return ERR;
+    
     obs += ret;
   
     ip = m + 1;
@@ -285,7 +320,25 @@ int quicksort_src(int* tabla, int ip, int iu) {
 }
 
 
-/*CABECERA*/
+/****************************************************************/
+/* Funcion: partir                           Fecha: 06/11/2020  */
+/* Autores: Isaac Barriales & Jose A. Bravo                     */
+/*                                                              */
+/* Esta función devuelve el número de veces que                 */
+/* se ha ejecutado la OB en el caso de que se                   */
+/* haya partido correctamente la tabla según *pos               */  
+/* Entrada:                                                     */
+/*     int* tabla: puntero a una tabla que se va a ordenar      */
+/*                 tabla != NULL                                */
+/*     int ip: El indice del primer elemento de la tabla        */
+/*                                                              */
+/*     int iu: El indice del último elemento de la tabla        */
+/*     int* pos: El puntero del indice del elemento a ordenar   */
+/*                                                              */
+/* Salida                                                       */
+/*     int obs: El Nº de veces que se ejecuta la OB             */
+/*                o ERR en caso de error                        */
+/****************************************************************/
 int partir(int* tabla, int ip, int iu, int* pos) {
   int i, k;
   int obs;
@@ -309,7 +362,25 @@ int partir(int* tabla, int ip, int iu, int* pos) {
 }
 
 
-/*CABECERA*/
+/****************************************************************/
+/* Funcion: medio                             Fecha: 06/11/2020 */
+/* Autores: Isaac Barriales Y Jose Antonio Bravo                */
+/*                                                              */
+/* Rutina que pasa al puntero pos                               */
+/* la posición donde se encuentra el primer                     */
+/* elemento de la tabla                                         */
+/*                                                              */
+/* Entrada:                                                     */
+/*   int* tabla: puntero a una tabla                            */
+/*               tabla != NULL                                  */
+/*   int ip: El indice del primer elemento de la tabla          */
+/*                                                              */
+/*   int iu: El indice del último elemento de la tabla          */
+/*   int* pos: El puntero del indice del elemento a ordenar     */
+/*                                                              */
+/* Salida:                                                      */
+/*   La salida siempre será 0                                   */
+/****************************************************************/
 int medio(int* tabla, int ip, int iu, int *pos) {
 
   *pos = ip;
